@@ -1,22 +1,22 @@
-import { MovieDetails, Production } from 'models';
-import React from 'react';
-import { formatDate } from 'utils';
+import { MovieDetails, Production } from "models";
+import React from "react";
+import { formatDate } from "utils";
 
 interface Props {
   movie: MovieDetails;
 }
 
-const Info: React.FC<Props> = ({ movie }): JSX.Element => {
+function Info({ movie }: Props) {
   return (
-    <div className="flex flex-col w-full p-4 mt-4 text-xs lg:mt-0 lg:min-w-0 bg-neutral-900">
-      <h1 className="mb-1 text-xl border-b border-neutral-600">Information</h1>
+    <div className="flex flex-col w-full p-4 mt-4 text-xs lg:mt-0 lg:min-w-0 bg-base-300">
+      <h1 className="mb-1 text-xl border-b border-neutral">Information</h1>
       <div className="flex flex-col justify-between py-1">
         <p className="font-bold">Release Date</p>
         <p>{formatDate(movie.release_date)}</p>
       </div>
       <div className="flex flex-col justify-between py-1">
         <p className="font-bold">Genres</p>
-        <p>{movie.genres.map((genre) => genre.name).join(', ')}</p>
+        <p>{movie.genres.map((genre) => genre.name).join(", ")}</p>
       </div>
       <div className="flex flex-col justify-between py-1">
         <p className="font-bold">Budget</p>
@@ -30,7 +30,7 @@ const Info: React.FC<Props> = ({ movie }): JSX.Element => {
         <p className="font-bold">Production</p>
         {movie.production_companies
           .map((company: Production) => company.name)
-          .join(', ')}
+          .join(", ")}
       </div>
       <div className="flex flex-col justify-between py-1">
         <p className="font-bold">Website</p>
@@ -45,6 +45,6 @@ const Info: React.FC<Props> = ({ movie }): JSX.Element => {
       </div>
     </div>
   );
-};
+}
 
 export default Info;

@@ -1,18 +1,18 @@
-import { MovieResult } from 'models';
-import React from 'react';
-import Thumbnail from './Thumbnail';
+import { MovieResult } from "models";
+import React from "react";
+import Thumbnail from "./Thumbnail";
 
 interface Props {
   results: any;
-  classes?: string;
+  classes: string;
 }
 
-const Results: React.FC<Props> = ({ results, classes }): JSX.Element => {
+function Results({ results, classes }: Props) {
   const formattedResults: JSX.Element[] = results.map((movie: MovieResult) => (
     <Thumbnail key={movie.id} id={movie.id} />
   ));
 
   return <div className={classes}>{formattedResults}</div>;
-};
+}
 
 export default Results;

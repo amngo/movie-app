@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from "dayjs";
 
 const comparator = (a, b) => {
   if (a.label.toLowerCase() < b.label.toLowerCase()) {
@@ -12,9 +12,9 @@ const comparator = (a, b) => {
 
 export const genreToFilter = (genres) => {
   const genreFilters = [];
-  for (let key in genres) {
-    genreFilters.push({ value: key, label: genres[key] });
-  }
+  Object.keys(genres).forEach((key) =>
+    genreFilters.push({ value: key, label: genres[key] }),
+  );
   genreFilters.sort(comparator);
 
   return genreFilters;
@@ -29,17 +29,18 @@ export const formatRuntime = (m: number): string => {
 };
 
 export const formatDate = (date: string): string => {
-  return moment(date, 'YYYY-MM-DD').format('MMM D, YYYY');
+  return dayjs(date, "YYYY-MM-DD").format("MMM D, YYYY");
 };
 
 export const parseCertification = (certifications: any): string => {
   let flag = true;
+  let parsed;
 
   certifications.results.every((result) => {
-    if (result['iso_3166_1'] === 'US') {
-      result['release_dates'].every((date) => {
-        if (date.certification !== '') {
-          certifications = date.certification;
+    if (result.iso_3166_1 === "US") {
+      result.release_dates.every((date) => {
+        if (date.certification !== "") {
+          parsed = date.certification;
           flag = false;
         }
         return flag;
@@ -48,5 +49,5 @@ export const parseCertification = (certifications: any): string => {
     return flag;
   });
 
-  return flag ? 'NR' : certifications;
+  return flag ? "NR" : parsed;
 };

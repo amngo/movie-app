@@ -1,38 +1,40 @@
-import { GENRES } from 'data';
-import { NextRouter, useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { GENRES } from "data";
+import { NextRouter, useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 const formattedGenres = Object.fromEntries(
   GENRES.map((genre) => [genre.id, false]),
 );
 
 interface Props {
-  selected?: string[];
+  selected: string[];
 }
 
-const Genres: React.FC<Props> = ({ selected }): JSX.Element => {
+function Genres({ selected }: Props) {
   const [checked, setChecked] = useState(formattedGenres);
   const router: NextRouter = useRouter();
-  console.log(checked);
 
   useEffect(() => {
     if (selected) {
       const selectedGenres = { ...checked };
-      selected.forEach((id) => (selectedGenres[id] = true));
+      selected.forEach((id) => {
+        selectedGenres[id] = true;
+      });
       setChecked(selectedGenres);
     }
   }, []);
 
   const handleChange = (e: React.SyntheticEvent<EventTarget>) => {
     const id = (e.target as HTMLInputElement).name;
-    const selected = [];
-    for (const key in checked) {
-      if (checked[key] && key.localeCompare(id) !== 0) selected.push(key);
-    }
-    router.push(`/?genres=${selected.join(',')}`);
+    const select = [];
+    Object.keys(checked).forEach((key) => {
+      if (checked[key] && key.localeCompare(id) !== 0) select.push(key);
+    });
+    router.push(`/?genres=${selected.join(",")}`);
   };
 
   const genres = GENRES.map((genre) => (
+    // eslint-disable-next-line jsx-a11y/label-has-associated-control
     <label key={genre.id}>
       <input
         type="checkbox"
@@ -51,6 +53,6 @@ const Genres: React.FC<Props> = ({ selected }): JSX.Element => {
       <form className="grid grid-cols-2 text-sm gap-x-6 gap-y-2">{genres}</form>
     </div>
   );
-};
+}
 
 export default Genres;

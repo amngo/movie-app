@@ -1,8 +1,8 @@
 module.exports = {
-  mode: 'jit',
+  mode: "jit",
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     container: {
@@ -10,5 +10,9 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require('tailwind-scrollbar-hide'), require('@tailwindcss/forms')],
+  plugins: [
+    require("tailwind-scrollbar-hide"),
+    require("@tailwindcss/forms"),
+    require("daisyui"),
+  ],
 };

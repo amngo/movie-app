@@ -1,16 +1,16 @@
-import { useMovies } from 'hooks';
-import Image from 'next/image';
-import React from 'react';
+import { useMovies } from "hooks";
+import Image from "next/image";
+import React from "react";
 
-const BASE_URL: string = 'https://image.tmdb.org/t/p/w185';
+const BASE_URL: string = "https://image.tmdb.org/t/p/w185";
 
 interface Props {
   id: string;
 }
 
-const Cast: React.FC<Props> = ({ id }): JSX.Element => {
+function Cast({ id }: Props) {
   const { data, isLoading } = useMovies(`/movie/${id}/credits`);
-  if (isLoading) return <div></div>;
+  if (isLoading) return <div />;
 
   const cast = data?.cast.map((person) => {
     return (
@@ -24,7 +24,7 @@ const Cast: React.FC<Props> = ({ id }): JSX.Element => {
               src={
                 person.profile_path
                   ? `${BASE_URL}${person.profile_path}`
-                  : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
+                  : "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
               }
               alt={person.name}
             />
@@ -41,7 +41,7 @@ const Cast: React.FC<Props> = ({ id }): JSX.Element => {
 
   return (
     <div className="w-full my-8">
-      <h1 className="w-full pb-1 mb-4 text-xl border-b border-neutral-600">
+      <h1 className="w-full pb-1 mb-4 text-xl border-b border-neutral">
         Cast ({cast.length})
       </h1>
 
@@ -50,6 +50,6 @@ const Cast: React.FC<Props> = ({ id }): JSX.Element => {
       </div>
     </div>
   );
-};
+}
 
 export default Cast;
