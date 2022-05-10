@@ -27,16 +27,6 @@ function Nav() {
           Now Playing
         </a>
       </Link>
-      <Link href="/popular" passHref>
-        <a
-          href="replace"
-          className={`tab tab-xs sm:tab-md ${
-            router.pathname === "/popular" ? "tab-active" : ""
-          }`}
-        >
-          Popular
-        </a>
-      </Link>
       <Link href="/upcoming" passHref>
         <a
           href="replace"

@@ -18,9 +18,9 @@ function SearchPage() {
         <meta name="description" content="Search results" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="relative flex flex-col items-center h-full min-w-0">
-        <div className="flex space-x-2">
-          <div className="flex flex-col w-3/4 space-y-2">
+      <div className="relative flex flex-col items-center min-w-0">
+        <div className="flex h-full space-x-2">
+          <div className="flex flex-col space-y-2 xl:w-3/4">
             <Nav />
             <Pagination
               url={router.basePath}
@@ -42,7 +42,7 @@ function SearchPage() {
             />
           </div>
 
-          <div className="w-1/4">
+          <div className="hidden lg:w-1/4 xl:block">
             <Filter genres={router.query.genres as string} />
           </div>
         </div>
